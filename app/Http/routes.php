@@ -47,12 +47,12 @@ Route::group(['middleware' => ['web']], function () {
     ]);
 	
 	//Login pressed
-    /*
+    
 	Route::post('/validcustomerlogin',[
     'uses'=>'CustomerController@validatecustomerlogin',
     'as'=>'validcustomerloginlink'
     ]);
-*/
+
 	//Login pages
 	
 	Route::get('/loginRest', [
@@ -125,8 +125,8 @@ Route::group(['middleware' => ['web']], function () {
     'as'=>'customeroverviewlink',
     ]);
 
-    Route::get('/customermenuoverview',[
-    'uses'=>'CustomerController@showcustomermenuoverview',
+    Route::get('/menu/{restaurant}',[
+    'uses'=>'CustomerController@showcustomermenu',
     'as'=>'customermenuoverviewlink'
     ]);
 

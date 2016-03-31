@@ -28,11 +28,14 @@ J3 Foods - Online Food Ordering
 			<div class="row">
 				@foreach ($restaurants as $rest)
                   <div class="col-sm-3 text-center">
-                      <a href="{{ route('customermenuoverviewlink'  ) }}">
+                      <a href="{{ route('customermenuoverviewlink' , ['restaurant' => $rest->id] ) }}">
                           <img class="img-responsive" src="http://placehold.it/700x400" alt="">
                       </a>
                       <h5>
-                          <a href="#">{{$rest->name}}</a>
+                          <a href="{{ route('customermenuoverviewlink' , ['restaurant' => $rest->id] ) }}">{{$rest->name}}</a>
+						  <a class= "btn btn-default" href="#"> <span class="glyphicon glyphicon-star-empty"></span> </a>
+						  <!-- use <span class="glyphicon glyphicon-star"> when the user has it favourited, might be some if statement to determine, like if favourited then use this glyphicaon
+						  i guess we need to also find out a way to do it in real time!-->
                       </h5>
                   </div>
 				@endforeach

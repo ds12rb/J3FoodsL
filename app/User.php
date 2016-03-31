@@ -23,4 +23,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+	
+	public function menu(){
+		return $this->hasMany(Item::class, 'rest_id');
+	}
+	
+	
 }

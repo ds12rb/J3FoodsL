@@ -26,7 +26,7 @@ J3 Foods - Online Food Ordering
               <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
 			  
               <label class="sr-only" for="email">Email:</label>
-              <input type="text" class="form-control" name="email" id="email" placeholder="Email"/>
+              <input type="text" class="form-control" name="email" id="email" value="{{$currentUser->email}}" />
 			  @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -36,13 +36,13 @@ J3 Foods - Online Food Ordering
 
               <div class="input-row row">
               <label class="sr-only" for="firstname">Name:</label>
-              <input type="text" class="form-control" name="name" id="name" placeholder="Name"/>
+              <input type="text" class="form-control" name="name" id="name"  value="{{$currentUser->name}}"/>
               </div>
 
 
               <div class="form-group{{ $errors->has('phoneno') ? ' has-error' : '' }}">
               <label class="sr-only" for="phonenumber">Phone Number:</label>
-              <input type="text" class="form-control" name="phoneno" id="phoneno" placeholder="Phone Number"/>
+              <input type="text" class="form-control" name="phoneno" id="phoneno"  value="{{$currentCustomer->phoneno}}"/>
 			  @if ($errors->has('phoneno'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('phoneno') }}</strong>

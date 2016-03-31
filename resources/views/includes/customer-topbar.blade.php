@@ -53,7 +53,6 @@
               <li><a href="#">Welcome</a></li>
               <li><a href="{{ route('customeroverviewlink'  ) }}">Overview</a></li>
               <li><a href="{{ route('customerprofilelink'  ) }}">Edit Profile</a></li>
-			  <li><a href="{{ route('dbtest'  ) }}">DB test</a></li>
               <li><a href="#">Help</a></li>
               <li class="separator"> </li>
               <li><a href=" {{ url('/logout') }}">Logout NOW</a></li>

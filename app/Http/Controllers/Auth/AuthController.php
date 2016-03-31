@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 use DB;
 use App\User;
+use App\Customer;
+use App\Restaurant;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -59,26 +61,28 @@ class AuthController extends Controller
         }
 
         Auth::guard($this->getGuard())->login($this->create($request->all()));
-		
+		$results = DB::select("SELECT  `id` FROM  `users` WHERE email =  ?",[$request->email]);
+    		    $idOfUser=  $results[0]->id;
     		if($request->isRestaurant == "1"){
             //Register a restaurant with the required fields
-    		    $results = DB::select("SELECT  `id` FROM  `users` WHERE email =  ?",[$request->email]);
-    		    $idOfUser=  $results[0]->id;
-    		    DB::table('restaurant')->
-    		    insert(['id' => $idOfUser,
-    		      'CompanyName' => $request->companyname,
-    		      'Address' => $request->address,
-    		      'Province' => $request->province,
-    		      'City' => $request->city,
-    		      'PostalCode' => $request->postalcode,
-    		      'PhoneNumber' => $request->phoneno,
-    		    ]);
-            return redirect()->action('RestaurantController@showrestaurantoverview');	
+    		    
+				$restaurant = new Restaurant;
+				
+				$restaurant->id = $idOfUser;
+				$restaurant->companyname = $request->companyname;
+				$restaurant->address = $request->address;
+				$restaurant->province = $request->province;
+				$restaurant->city = $request->city;
+				$restaurant->postalcode = $request->postalcode;
+				$restaurant->phoneno = $request->phoneno;			
+				$restaurant->save();
+				return redirect()->action('RestaurantController@showrestaurantoverview');	
     		} else{
-            //register a customer, linked by an id.
-            $results = DB::select("SELECT  `id` FROM  `users` WHERE email =  ?",[$request->email]);
-            $idOfUser=  $results[0]->id;
-            DB::table('customer')->insert(['id' => $idOfUser]);
+				//register a customer, linked by an id.
+				$customer = new Customer;
+				$customer->id = $idOfUser;
+				$customer->phoneno = "";
+				$customer->save();
     		    return redirect($this->redirectPath());
     		}
     }
